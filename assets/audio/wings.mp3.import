@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wings.mp3-e6736e66ff3cdf496fab78ad600bfcab.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/wings.mp3"
+dest_files=[ "res://.import/wings.mp3-e6736e66ff3cdf496fab78ad600bfcab.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

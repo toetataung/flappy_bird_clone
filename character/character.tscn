@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprite/yellowbird.png" type="Texture" id=1]
+[ext_resource path="res://character/character.gd" type="Script" id=2]
+[ext_resource path="res://assets/audio/hit.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/audio/wings.mp3" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "flap"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=2]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 3 ), Vector2( 0, -3 ) ]
+}
+
+[node name="character" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -3 )
+scale = Vector2( 3.125, 3.125 )
+texture = ExtResource( 1 )
+hframes = 3
+frame = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 0, -3 )
+build_mode = 1
+polygon = PoolVector2Array( 19.8327, -6.45429, 20.3631, 2.91487, 23.1915, 3.26842, 23.0147, 6.45041, 26.3735, 5.92007, 26.727, 8.57173, 23.7218, 9.27883, 23.1915, 15.2892, 20.5398, 15.466, 20.1863, 18.2944, 4.80672, 18.4712, 4.80672, 21.2996, -11.6335, 21.4764, -10.9264, 18.4712, -17.9975, 18.4712, -16.9368, 15.2892, -20.8259, 15.6428, -20.8259, 9.10205, -23.124, 8.92528, -23.4776, 5.92007, -26.8363, 5.92007, -26.8363, -3.44909, -23.6543, -3.62587, -23.6543, -6.45429, -17.6439, -6.10074, -17.1136, -8.92917, -14.4619, -9.4595, -13.5781, -12.6415, -7.74443, -13.3486, -7.74443, -16.0002, 10.2868, -15.4699, 10.8171, -12.6415, 14.3527, -12.8183, 14.5294, -9.63627, 17.0043, -9.4595, 16.474, -6.45429 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/flap = SubResource( 1 )
+anims/idle = SubResource( 2 )
+
+[node name="die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.0
+
+[node name="flap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -15.0
